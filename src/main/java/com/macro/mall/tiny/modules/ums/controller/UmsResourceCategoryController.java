@@ -18,8 +18,8 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "UmsResourceCategoryController")
-@Tag(name = "UmsResourceCategoryController",description = "后台资源分类管理")
-@RequestMapping("/resourceCategory")
+@Tag(name = "UmsResourceCategoryController", description = "后台资源分类管理")
+@RequestMapping("/api/v1/resourceCategory")
 public class UmsResourceCategoryController {
     @Autowired
     private UmsResourceCategoryService resourceCategoryService;

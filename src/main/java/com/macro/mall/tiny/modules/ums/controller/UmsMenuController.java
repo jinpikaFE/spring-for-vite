@@ -21,8 +21,8 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "UmsMenuController")
-@Tag(name = "UmsMenuController",description = "后台菜单管理")
-@RequestMapping("/menu")
+@Tag(name = "UmsMenuController", description = "后台菜单管理")
+@RequestMapping("/api/v1/menu")
 public class UmsMenuController {
 
     @Autowired
