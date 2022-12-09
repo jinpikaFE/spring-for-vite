@@ -4,7 +4,6 @@ import com.macro.mall.tiny.common.api.CommonResult;
 import com.macro.mall.tiny.modules.upload.dto.CosCallbackResult;
 import com.macro.mall.tiny.modules.upload.service.impl.CosServiceImpl;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -28,7 +27,6 @@ public class CosController {
 
     @ApiOperation(value = "cos上传对象")
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    @ApiImplicitParam(name = "file", value = "文件", dataType = "MultipartFile")
     @ResponseBody
     public CommonResult<CosCallbackResult> upload(@RequestPart("file") MultipartFile file) {
 

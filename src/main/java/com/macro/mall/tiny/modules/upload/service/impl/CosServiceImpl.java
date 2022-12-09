@@ -56,8 +56,6 @@ public class CosServiceImpl implements CosService {
             result.setMimeType(file.getContentType());
         } catch (Exception e) {
             LOGGER.error("上传失败", e);
-        } finally {
-            cosClient.shutdown();
         }
         return result;
     }
