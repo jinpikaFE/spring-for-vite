@@ -33,8 +33,4 @@ public interface UmsMenuService extends IService<UmsMenu> {
      */
     List<UmsMenuNode> treeList();
 
-    /**
-     * 修改菜单显示状态
-     */
-    boolean updateHidden(Long id, Integer hidden);
 }

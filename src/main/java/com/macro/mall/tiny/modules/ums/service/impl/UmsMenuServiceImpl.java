@@ -71,14 +71,6 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
         return result;
     }
 
-    @Override
-    public boolean updateHidden(Long id, Integer hidden) {
-        UmsMenu umsMenu = new UmsMenu();
-        umsMenu.setId(id);
-        umsMenu.setHidden(hidden);
-        return updateById(umsMenu);
-    }
-
     /**
      * 将UmsMenu转化为UmsMenuNode并设置children属性
      */

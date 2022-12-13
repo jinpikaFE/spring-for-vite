@@ -90,16 +90,4 @@ public class UmsMenuController {
         List<UmsMenuNode> list = menuService.treeList();
         return CommonResult.success(list);
     }
-
-    @ApiOperation("修改菜单显示状态")
-    @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
-        boolean success = menuService.updateHidden(id, hidden);
-        if (success) {
-            return CommonResult.success(null);
-        } else {
-            return CommonResult.failed();
-        }
-    }
 }
