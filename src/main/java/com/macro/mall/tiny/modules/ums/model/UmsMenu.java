@@ -54,5 +54,6 @@ public class UmsMenu implements Serializable {
     @ApiModelProperty(value = "是否显示")
     private Integer isShow;
 
-
+    @ApiModelProperty(value = "菜单类型")
+    private Integer type;
 }
