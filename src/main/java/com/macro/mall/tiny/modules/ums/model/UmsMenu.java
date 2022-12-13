@@ -3,6 +3,8 @@ package com.macro.mall.tiny.modules.ums.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.macro.mall.tiny.common.utils.LongZeroToNullSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -30,6 +32,7 @@ public class UmsMenu implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @JsonSerialize(using = LongZeroToNullSerializer.class)
     @ApiModelProperty(value = "父级ID")
     private Long parentId;
 
