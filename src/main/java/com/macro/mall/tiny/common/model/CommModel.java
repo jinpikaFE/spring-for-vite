@@ -2,6 +2,7 @@ package com.macro.mall.tiny.common.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -17,5 +18,6 @@ public class CommModel {
     @TableField(fill = FieldFill.INSERT_UPDATE) // 更新时自动填充
     private Date updateTime;
 
+    @JsonIgnore
     private Integer deleted;
 }
