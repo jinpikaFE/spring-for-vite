@@ -3,6 +3,7 @@ package com.macro.mall.tiny.modules.ums.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.macro.mall.tiny.common.model.CommModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,6 +34,7 @@ public class UmsAdmin extends CommModel implements Serializable {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     @ApiModelProperty(value = "头像")
