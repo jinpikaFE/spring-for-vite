@@ -75,6 +75,20 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
         return null;
     }
 
+    public UmsAdmin getAdminByUsername(String username, Boolean needCache) {
+        UmsAdmin admin = getCacheService().getAdmin(username);
+        if (admin != null && needCache) return admin;
+        QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(UmsAdmin::getUsername, username);
+        List<UmsAdmin> adminList = list(wrapper);
+        if (adminList != null && adminList.size() > 0) {
+            admin = adminList.get(0);
+            getCacheService().setAdmin(admin);
+            return admin;
+        }
+        return null;
+    }
+
     @Override
     public UmsAdmin register(UmsAdminParam umsAdminParam) {
         UmsAdmin umsAdmin = new UmsAdmin();
@@ -98,7 +112,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
         String token = null;
         //密码需要客户端加密后传递
         try {
-            UserDetails userDetails = loadUserByUsername(username);
+            UserDetails userDetails = loadUserByUsername(username, false);
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 Asserts.fail("密码不正确");
             }
@@ -256,6 +270,16 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     public UserDetails loadUserByUsername(String username) {
         //获取用户信息
         UmsAdmin admin = getAdminByUsername(username);
+        if (admin != null) {
+            List<UmsResource> resourceList = getResourceList(admin.getId());
+            return new AdminUserDetails(admin, resourceList);
+        }
+        throw new UsernameNotFoundException("用户名或密码错误");
+    }
+
+    public UserDetails loadUserByUsername(String username, Boolean needCache) {
+        //获取用户信息
+        UmsAdmin admin = getAdminByUsername(username, needCache);
         if (admin != null) {
             List<UmsResource> resourceList = getResourceList(admin.getId());
             return new AdminUserDetails(admin, resourceList);
