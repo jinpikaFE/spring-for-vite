@@ -1,14 +1,16 @@
 package com.macro.mall.tiny.modules.ums.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.macro.mall.tiny.common.model.CommModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -21,10 +23,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("ums_admin")
-@ApiModel(value="UmsAdmin对象", description="后台用户表")
-public class UmsAdmin implements Serializable {
+@ApiModel(value = "UmsAdmin对象", description = "后台用户表")
+public class UmsAdmin extends CommModel implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
@@ -45,14 +47,9 @@ public class UmsAdmin implements Serializable {
     @ApiModelProperty(value = "备注信息")
     private String note;
 
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
     @ApiModelProperty(value = "最后登录时间")
     private Date loginTime;
 
     @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
     private Integer status;
-
-
 }
