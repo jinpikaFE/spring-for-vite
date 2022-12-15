@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 /**
  * 用户登录参数
@@ -31,4 +32,6 @@ public class UmsAdminParam {
     private String note;
     @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用")
     private Integer status;
+    @ApiModelProperty(value = "角色ids")
+    private List<Long> roleIds;
 }
