@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.macro.mall.tiny.common.exception.Asserts;
 import com.macro.mall.tiny.domain.AdminUserDetails;
+import com.macro.mall.tiny.modules.ums.dto.UmsAdminDto;
 import com.macro.mall.tiny.modules.ums.dto.UmsAdminParam;
 import com.macro.mall.tiny.modules.ums.dto.UpdateAdminPasswordParam;
 import com.macro.mall.tiny.modules.ums.mapper.UmsAdminLoginLogMapper;
@@ -60,6 +61,8 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     private UmsRoleMapper roleMapper;
     @Autowired
     private UmsResourceMapper resourceMapper;
+    @Autowired
+    private UmsAdminMapper umsAdminMapper;
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
@@ -297,5 +300,20 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     @Override
     public UmsAdminCacheService getCacheService() {
         return SpringUtil.getBean(UmsAdminCacheService.class);
+    }
+
+    @Override
+    public Page<UmsAdminDto> listAll(String keyword, Integer pageSize, Integer pageNum) {
+        Page<UmsAdminDto> page = new Page<>(pageNum, pageSize);
+        List<UmsAdminDto> result = umsAdminMapper.getAdminList(keyword, pageSize, (pageNum - 1) * pageSize);
+        QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
+        LambdaQueryWrapper<UmsAdmin> lambda = wrapper.lambda();
+        if (StrUtil.isNotEmpty(keyword)) {
+            lambda.like(UmsAdmin::getUsername, keyword);
+            lambda.or().like(UmsAdmin::getNickName, keyword);
+        }
+        page.setRecords(result);
+        page.setTotal(count(wrapper));
+        return page;
     }
 }

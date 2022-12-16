@@ -2,6 +2,7 @@ package com.macro.mall.tiny.modules.ums.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.macro.mall.tiny.modules.ums.dto.UmsAdminDto;
 import com.macro.mall.tiny.modules.ums.dto.UmsAdminParam;
 import com.macro.mall.tiny.modules.ums.dto.UpdateAdminPasswordParam;
 import com.macro.mall.tiny.modules.ums.model.UmsAdmin;
@@ -86,4 +87,9 @@ public interface UmsAdminService extends IService<UmsAdmin> {
      * 获取缓存服务
      */
     UmsAdminCacheService getCacheService();
+
+    /**
+     * 获取所有admin
+     */
+    Page<UmsAdminDto> listAll(String keyword, Integer pageSize, Integer pageNum);
 }
