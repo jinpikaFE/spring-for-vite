@@ -1,5 +1,7 @@
 package com.macro.mall.tiny.modules.ums.dto;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 public class UmsAdminParam {
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     @NotEmpty
     @ApiModelProperty(value = "用户名", required = true)
     private String username;
