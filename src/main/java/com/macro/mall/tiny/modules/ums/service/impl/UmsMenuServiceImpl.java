@@ -3,6 +3,7 @@ package com.macro.mall.tiny.modules.ums.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.macro.mall.tiny.common.exception.Asserts;
 import com.macro.mall.tiny.modules.ums.dto.UmsMenuNode;
 import com.macro.mall.tiny.modules.ums.mapper.UmsMenuMapper;
 import com.macro.mall.tiny.modules.ums.model.UmsMenu;
@@ -23,6 +24,12 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
 
     @Override
     public boolean create(UmsMenu umsMenu) {
+        QueryWrapper<UmsMenu> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(UmsMenu::getName, umsMenu.getName());
+        List<UmsMenu> umsMenuList = list(wrapper);
+        if (umsMenuList.size() > 0) {
+            Asserts.fail("name已经存在");
+        }
         umsMenu.setCreateTime(new Date());
         updateLevel(umsMenu);
         return save(umsMenu);
@@ -48,6 +55,17 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
 
     @Override
     public boolean update(Long id, UmsMenu umsMenu) {
+        UmsMenu rawMenu = getById(id);
+        if (!rawMenu.getName().equals(umsMenu.getName())) {
+            // 与原来不同，则需要查询更新后的是否已经存在
+            //查询是否有相同用户名的用户
+            QueryWrapper<UmsMenu> wrapper = new QueryWrapper<>();
+            wrapper.lambda().eq(UmsMenu::getName, umsMenu.getName());
+            List<UmsMenu> umsMenuList = list(wrapper);
+            if (umsMenuList.size() > 0) {
+                Asserts.fail("name已经存在");
+            }
+        }
         umsMenu.setId(id);
         updateLevel(umsMenu);
         return updateById(umsMenu);

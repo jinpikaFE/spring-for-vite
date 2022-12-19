@@ -100,7 +100,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
         wrapper.lambda().eq(UmsAdmin::getUsername, umsAdmin.getUsername());
         List<UmsAdmin> umsAdminList = list(wrapper);
         if (umsAdminList.size() > 0) {
-            return null;
+            Asserts.fail("用户已经存在");
         }
         //将密码进行加密操作
         String encodePassword = passwordEncoder.encode(umsAdmin.getPassword());
@@ -183,6 +183,16 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
         BeanUtils.copyProperties(umsAdminParam, admin);
         admin.setId(id);
         UmsAdmin rawAdmin = getById(id);
+        if (!rawAdmin.getUsername().equals(admin.getUsername())) {
+            // 与原来不同，则需要查询更新后的是否已经存在
+            //查询是否有相同用户名的用户
+            QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
+            wrapper.lambda().eq(UmsAdmin::getUsername, admin.getUsername());
+            List<UmsAdmin> umsAdminList = list(wrapper);
+            if (umsAdminList.size() > 0) {
+                Asserts.fail("用户已经存在");
+            }
+        }
         if (rawAdmin.getPassword().equals(admin.getPassword())) {
             //与原加密密码相同的不需要修改
             admin.setPassword(null);
