@@ -1,7 +1,10 @@
 package com.macro.mall.tiny.modules.ums.mapper;
 
-import com.macro.mall.tiny.modules.ums.model.UmsResourceCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.macro.mall.tiny.modules.ums.dto.UmsResourceCategoryDto;
+import com.macro.mall.tiny.modules.ums.model.UmsResourceCategory;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-08-21
  */
 public interface UmsResourceCategoryMapper extends BaseMapper<UmsResourceCategory> {
-
+    /**
+     * 分页获取资源，联合查询分类
+     */
+    List<UmsResourceCategoryDto> getResourceCategoryAss();
 }

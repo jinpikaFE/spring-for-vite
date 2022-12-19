@@ -1,6 +1,7 @@
 package com.macro.mall.tiny.modules.ums.controller;
 
 import com.macro.mall.tiny.common.api.CommonResult;
+import com.macro.mall.tiny.modules.ums.dto.UmsResourceCategoryDto;
 import com.macro.mall.tiny.modules.ums.model.UmsResourceCategory;
 import com.macro.mall.tiny.modules.ums.service.UmsResourceCategoryService;
 import io.swagger.annotations.Api;
@@ -27,8 +28,8 @@ public class UmsResourceCategoryController {
     @ApiOperation("查询所有后台资源分类")
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<UmsResourceCategory>> listAll() {
-        List<UmsResourceCategory> resourceList = resourceCategoryService.listAll();
+    public CommonResult<List<UmsResourceCategoryDto>> listAll() {
+        List<UmsResourceCategoryDto> resourceList = resourceCategoryService.listAll();
         return CommonResult.success(resourceList);
     }
 

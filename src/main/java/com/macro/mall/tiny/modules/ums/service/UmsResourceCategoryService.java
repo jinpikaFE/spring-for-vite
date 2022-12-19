@@ -2,6 +2,7 @@ package com.macro.mall.tiny.modules.ums.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.macro.mall.tiny.modules.ums.dto.UmsResourceCategoryDto;
 import com.macro.mall.tiny.modules.ums.model.UmsResourceCategory;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface UmsResourceCategoryService extends IService<UmsResourceCategory
     /**
      * 获取所有资源分类
      */
-    List<UmsResourceCategory> listAll();
+    List<UmsResourceCategoryDto> listAll();
 
     /**
      * 创建资源分类

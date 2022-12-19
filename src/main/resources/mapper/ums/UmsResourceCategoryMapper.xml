@@ -4,10 +4,36 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.macro.mall.tiny.modules.ums.model.UmsResourceCategory">
-        <id column="id" property="id" />
-        <result column="create_time" property="createTime" />
-        <result column="name" property="name" />
-        <result column="sort" property="sort" />
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="name" property="name"/>
+        <result column="sort" property="sort"/>
     </resultMap>
 
+    <!-- 关联资源查询映射结果 -->
+    <resultMap id="AssResultMap" type="com.macro.mall.tiny.modules.ums.dto.UmsResourceCategoryDto">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="name" property="name"/>
+        <result column="sort" property="sort"/>
+        <collection property="resources" select="getResourcesByCategoryId" column="id"></collection>
+    </resultMap>
+
+    <select id="getResourcesByCategoryId" resultType="com.macro.mall.tiny.modules.ums.model.UmsResource">
+        select re.*
+        from ums_resource re
+        where re.category_id = #{id}
+    </select>
+
+    <select id="getResourceCategoryAss" resultMap="AssResultMap">
+        SELECT r.id, r.create_time, r.name, r.sort
+        FROM ums_resource_category r
+        <trim prefix="where" prefixOverrides="and">
+            And r.deleted = 0
+            <if test="keyword != null and keyword !=''">
+                AND r.name LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            ORDER BY r.id
+        </trim>
+    </select>
 </mapper>
