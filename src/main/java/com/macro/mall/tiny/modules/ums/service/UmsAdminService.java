@@ -26,6 +26,7 @@ public interface UmsAdminService extends IService<UmsAdmin> {
     /**
      * 注册功能
      */
+    @Transactional
     UmsAdmin register(UmsAdminParam umsAdminParam);
 
     /**
@@ -50,6 +51,7 @@ public interface UmsAdminService extends IService<UmsAdmin> {
     /**
      * 修改指定用户信息
      */
+    @Transactional
     boolean update(Long id, UmsAdmin admin);
 
     /**

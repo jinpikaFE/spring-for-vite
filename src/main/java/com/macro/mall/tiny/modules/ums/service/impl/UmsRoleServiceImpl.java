@@ -3,7 +3,9 @@ package com.macro.mall.tiny.modules.ums.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.macro.mall.tiny.common.exception.Asserts;
 import com.macro.mall.tiny.modules.ums.dto.UmsRoleDto;
+import com.macro.mall.tiny.modules.ums.dto.UmsRoleParams;
 import com.macro.mall.tiny.modules.ums.mapper.UmsMenuMapper;
 import com.macro.mall.tiny.modules.ums.mapper.UmsResourceMapper;
 import com.macro.mall.tiny.modules.ums.mapper.UmsRoleMapper;
@@ -16,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,11 +40,26 @@ public class UmsRoleServiceImpl extends ServiceImpl<UmsRoleMapper, UmsRole> impl
     private UmsRoleMapper umsRoleMapper;
 
     @Override
-    public boolean create(UmsRole role) {
-        role.setCreateTime(new Date());
-        role.setAdminCount(0);
-        role.setSort(0);
-        return save(role);
+    public UmsRoleParams create(UmsRoleParams role) {
+        Boolean success = save(role);
+        if (!success) {
+            Asserts.fail("添加角色基本信息失败");
+        }
+        this.allocMenu(role.getId(), role.getMenus());
+        this.allocResource(role.getId(), role.getResources());
+        return role;
+    }
+
+    @Override
+    public boolean update(Long id, UmsRoleParams role) {
+        role.setId(id);
+        boolean success = updateById(role);
+        if (!success) {
+            Asserts.fail("修改角色基本信息失败");
+        }
+        this.allocMenu(role.getId(), role.getMenus());
+        this.allocResource(role.getId(), role.getResources());
+        return true;
     }
 
     @Override

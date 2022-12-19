@@ -3,6 +3,7 @@ package com.macro.mall.tiny.modules.ums.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.macro.mall.tiny.modules.ums.dto.UmsRoleDto;
+import com.macro.mall.tiny.modules.ums.dto.UmsRoleParams;
 import com.macro.mall.tiny.modules.ums.model.UmsMenu;
 import com.macro.mall.tiny.modules.ums.model.UmsResource;
 import com.macro.mall.tiny.modules.ums.model.UmsRole;
@@ -18,7 +19,8 @@ public interface UmsRoleService extends IService<UmsRole> {
     /**
      * 添加角色
      */
-    boolean create(UmsRole role);
+    @Transactional
+    UmsRoleParams create(UmsRoleParams role);
 
     /**
      * 批量删除角色
@@ -56,4 +58,7 @@ public interface UmsRoleService extends IService<UmsRole> {
      */
     @Transactional
     int allocResource(Long roleId, List<Long> resourceIds);
+
+    @Transactional
+    boolean update(Long id, UmsRoleParams role);
 }

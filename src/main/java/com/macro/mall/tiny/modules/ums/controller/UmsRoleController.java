@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.common.api.CommonPage;
 import com.macro.mall.tiny.common.api.CommonResult;
 import com.macro.mall.tiny.modules.ums.dto.UmsRoleDto;
+import com.macro.mall.tiny.modules.ums.dto.UmsRoleParams;
 import com.macro.mall.tiny.modules.ums.model.UmsMenu;
 import com.macro.mall.tiny.modules.ums.model.UmsResource;
 import com.macro.mall.tiny.modules.ums.model.UmsRole;
@@ -32,10 +33,10 @@ public class UmsRoleController {
     @ApiOperation("添加角色")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsRole role) {
-        boolean success = roleService.create(role);
-        if (success) {
-            return CommonResult.success(null);
+    public CommonResult create(@RequestBody UmsRoleParams role) {
+        UmsRoleParams results = roleService.create(role);
+        if (results != null) {
+            return CommonResult.success(results);
         }
         return CommonResult.failed();
     }
@@ -43,9 +44,8 @@ public class UmsRoleController {
     @ApiOperation("修改角色")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody UmsRole role) {
-        role.setId(id);
-        boolean success = roleService.updateById(role);
+    public CommonResult update(@PathVariable Long id, @RequestBody UmsRoleParams role) {
+        boolean success = roleService.update(id, role);
         if (success) {
             return CommonResult.success(null);
         }
