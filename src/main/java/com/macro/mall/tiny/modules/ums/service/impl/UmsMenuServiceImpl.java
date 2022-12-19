@@ -28,7 +28,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
         wrapper.lambda().eq(UmsMenu::getName, umsMenu.getName());
         List<UmsMenu> umsMenuList = list(wrapper);
         if (umsMenuList.size() > 0) {
-            Asserts.fail("name已经存在");
+            Asserts.fail("前端标识名已经存在");
         }
         umsMenu.setCreateTime(new Date());
         updateLevel(umsMenu);
@@ -63,7 +63,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper, UmsMenu> impl
             wrapper.lambda().eq(UmsMenu::getName, umsMenu.getName());
             List<UmsMenu> umsMenuList = list(wrapper);
             if (umsMenuList.size() > 0) {
-                Asserts.fail("name已经存在");
+                Asserts.fail("前端标识名已经存在");
             }
         }
         umsMenu.setId(id);
