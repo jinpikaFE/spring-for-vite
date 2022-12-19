@@ -118,20 +118,10 @@ public class UmsAdminController {
     @ApiOperation("根据用户名或姓名分页获取用户列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<UmsAdmin>> list(@RequestParam(value = "keyword", required = false) String keyword,
-                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        Page<UmsAdmin> adminList = adminService.list(keyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(adminList));
-    }
-
-    @ApiOperation("获取所有用户")
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    @ResponseBody
-    public CommonResult<CommonPage<UmsAdminDto>> listAll(@RequestParam(value = "keyword", required = false) String keyword,
-                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        Page<UmsAdminDto> adminList = adminService.listAll(keyword, pageSize, pageNum);
+    public CommonResult<CommonPage<UmsAdminDto>> list(@RequestParam(value = "keyword", required = false) String keyword,
+                                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        Page<UmsAdminDto> adminList = adminService.list(keyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(adminList));
     }
 

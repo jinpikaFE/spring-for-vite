@@ -45,7 +45,7 @@ public interface UmsAdminService extends IService<UmsAdmin> {
     /**
      * 根据用户名或昵称分页查询用户
      */
-    Page<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum);
+    Page<UmsAdminDto> list(String keyword, Integer pageSize, Integer pageNum);
 
     /**
      * 修改指定用户信息
@@ -87,9 +87,4 @@ public interface UmsAdminService extends IService<UmsAdmin> {
      * 获取缓存服务
      */
     UmsAdminCacheService getCacheService();
-
-    /**
-     * 获取所有admin
-     */
-    Page<UmsAdminDto> listAll(String keyword, Integer pageSize, Integer pageNum);
 }

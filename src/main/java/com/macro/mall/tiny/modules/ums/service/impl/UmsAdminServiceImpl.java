@@ -2,7 +2,6 @@ package com.macro.mall.tiny.modules.ums.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -173,15 +172,10 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     }
 
     @Override
-    public Page<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum) {
-        Page<UmsAdmin> page = new Page<>(pageNum, pageSize);
-        QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
-        LambdaQueryWrapper<UmsAdmin> lambda = wrapper.lambda();
-        if (StrUtil.isNotEmpty(keyword)) {
-            lambda.like(UmsAdmin::getUsername, keyword);
-            lambda.or().like(UmsAdmin::getNickName, keyword);
-        }
-        return page(page, wrapper);
+    public Page<UmsAdminDto> list(String keyword, Integer pageSize, Integer pageNum) {
+        Page<UmsAdminDto> page = new Page<>(pageNum, pageSize);
+        Page<UmsAdminDto> result = umsAdminMapper.getAdminList(keyword, page);
+        return result;
     }
 
     @Override
@@ -300,12 +294,5 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     @Override
     public UmsAdminCacheService getCacheService() {
         return SpringUtil.getBean(UmsAdminCacheService.class);
-    }
-
-    @Override
-    public Page<UmsAdminDto> listAll(String keyword, Integer pageSize, Integer pageNum) {
-        Page<UmsAdminDto> page = new Page<>(pageNum, pageSize);
-        Page<UmsAdminDto> result = umsAdminMapper.getAdminList(keyword, page);
-        return result;
     }
 }
