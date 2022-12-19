@@ -52,7 +52,7 @@ public interface UmsAdminService extends IService<UmsAdmin> {
      * 修改指定用户信息
      */
     @Transactional
-    boolean update(Long id, UmsAdmin admin);
+    boolean update(Long id, UmsAdminParam admin);
 
     /**
      * 删除指定用户

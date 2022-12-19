@@ -177,7 +177,10 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     }
 
     @Override
-    public boolean update(Long id, UmsAdmin admin) {
+    public boolean update(Long id, UmsAdminParam umsAdminParam) {
+        UmsAdmin admin = new UmsAdmin();
+        // 复制实体
+        BeanUtils.copyProperties(umsAdminParam, admin);
         admin.setId(id);
         UmsAdmin rawAdmin = getById(id);
         if (rawAdmin.getPassword().equals(admin.getPassword())) {
@@ -192,6 +195,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
             }
         }
         boolean success = updateById(admin);
+        this.updateRole(admin.getId(), umsAdminParam.getRoleIds());
         getCacheService().delAdmin(id);
         return success;
     }

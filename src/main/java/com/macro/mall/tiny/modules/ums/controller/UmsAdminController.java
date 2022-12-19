@@ -136,7 +136,7 @@ public class UmsAdminController {
     @ApiOperation("修改指定用户信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id, @RequestBody UmsAdmin admin) {
+    public CommonResult update(@PathVariable Long id, @RequestBody UmsAdminParam admin) {
         boolean success = adminService.update(id, admin);
         if (success) {
             return CommonResult.success(null);
@@ -177,7 +177,7 @@ public class UmsAdminController {
     @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateStatus(@PathVariable Long id,@RequestParam(value = "status") Integer status) {
-        UmsAdmin umsAdmin = new UmsAdmin();
+        UmsAdminParam umsAdmin = new UmsAdminParam();
         umsAdmin.setStatus(status);
         boolean success = adminService.update(id,umsAdmin);
         if (success) {
