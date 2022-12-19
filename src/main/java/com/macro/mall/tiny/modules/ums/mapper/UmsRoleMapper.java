@@ -1,7 +1,9 @@
 package com.macro.mall.tiny.modules.ums.mapper;
 
-import com.macro.mall.tiny.modules.ums.model.UmsRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.macro.mall.tiny.modules.ums.dto.UmsRoleDto;
+import com.macro.mall.tiny.modules.ums.model.UmsRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -21,4 +23,8 @@ public interface UmsRoleMapper extends BaseMapper<UmsRole> {
      */
     List<UmsRole> getRoleList(@Param("adminId") Long adminId);
 
+    /**
+     * 分页获取角色 及对应的菜单和资源
+     */
+    Page<UmsRoleDto> getRoleListAndMS(String keyword, Page page);
 }

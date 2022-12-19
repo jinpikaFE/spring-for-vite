@@ -2,6 +2,7 @@ package com.macro.mall.tiny.modules.ums.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.macro.mall.tiny.modules.ums.dto.UmsRoleDto;
 import com.macro.mall.tiny.modules.ums.model.UmsMenu;
 import com.macro.mall.tiny.modules.ums.model.UmsResource;
 import com.macro.mall.tiny.modules.ums.model.UmsRole;
@@ -27,7 +28,7 @@ public interface UmsRoleService extends IService<UmsRole> {
     /**
      * 分页获取角色列表
      */
-    Page<UmsRole> list(String keyword, Integer pageSize, Integer pageNum);
+    Page<UmsRoleDto> list(String keyword, Integer pageSize, Integer pageNum);
 
     /**
      * 根据管理员ID获取对应菜单

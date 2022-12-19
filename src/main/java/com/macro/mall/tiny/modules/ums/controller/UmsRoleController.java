@@ -3,6 +3,7 @@ package com.macro.mall.tiny.modules.ums.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.common.api.CommonPage;
 import com.macro.mall.tiny.common.api.CommonResult;
+import com.macro.mall.tiny.modules.ums.dto.UmsRoleDto;
 import com.macro.mall.tiny.modules.ums.model.UmsMenu;
 import com.macro.mall.tiny.modules.ums.model.UmsResource;
 import com.macro.mall.tiny.modules.ums.model.UmsRole;
@@ -74,10 +75,10 @@ public class UmsRoleController {
     @ApiOperation("根据角色名称分页获取角色列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<UmsRole>> list(@RequestParam(value = "keyword", required = false) String keyword,
-                                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        Page<UmsRole> roleList = roleService.list(keyword, pageSize, pageNum);
+    public CommonResult<CommonPage<UmsRoleDto>> list(@RequestParam(value = "keyword", required = false) String keyword,
+                                                     @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        Page<UmsRoleDto> roleList = roleService.list(keyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(roleList));
     }
 
