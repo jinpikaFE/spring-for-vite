@@ -1,6 +1,7 @@
 package com.macro.mall.tiny.modules.ums.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.modules.ums.dto.UmsAdminDto;
 import com.macro.mall.tiny.modules.ums.model.UmsAdmin;
 import org.apache.ibatis.annotations.Param;
@@ -27,5 +28,5 @@ public interface UmsAdminMapper extends BaseMapper<UmsAdmin> {
      *
      * @return
      */
-    List<UmsAdminDto> getAdminList(String keyword, Integer pageSize, Integer from);
+    Page<UmsAdminDto> getAdminList(String keyword, Page page);
 }

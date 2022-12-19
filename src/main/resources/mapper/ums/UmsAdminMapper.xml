@@ -15,7 +15,7 @@
         <result column="status" property="status"/>
     </resultMap>
 
-    <!-- 通用查询映射结果 -->
+    <!-- 关系查询映射结果 -->
     <resultMap id="NeedRolesResultMap" type="com.macro.mall.tiny.modules.ums.dto.UmsAdminDto">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
@@ -73,7 +73,7 @@
                 AND u.username LIKE CONCAT('%',#{keyword},'%')
                 OR u.nick_name LIKE CONCAT('%',#{keyword},'%')
             </if>
-            ORDER BY u.id limit #{from},#{pageSize}
+            ORDER BY u.id
         </trim>
     </select>
 

@@ -305,15 +305,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
     @Override
     public Page<UmsAdminDto> listAll(String keyword, Integer pageSize, Integer pageNum) {
         Page<UmsAdminDto> page = new Page<>(pageNum, pageSize);
-        List<UmsAdminDto> result = umsAdminMapper.getAdminList(keyword, pageSize, (pageNum - 1) * pageSize);
-        QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
-        LambdaQueryWrapper<UmsAdmin> lambda = wrapper.lambda();
-        if (StrUtil.isNotEmpty(keyword)) {
-            lambda.like(UmsAdmin::getUsername, keyword);
-            lambda.or().like(UmsAdmin::getNickName, keyword);
-        }
-        page.setRecords(result);
-        page.setTotal(count(wrapper));
-        return page;
+        Page<UmsAdminDto> result = umsAdminMapper.getAdminList(keyword, page);
+        return result;
     }
 }
