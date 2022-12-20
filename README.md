@@ -13,7 +13,8 @@ mall-tiny是一款基于SpringBoot+MyBatis-Plus的快速开发脚手架，拥有
 
 ## 项目演示
 
-mall-tiny项目可无缝对接`mall-admin-web`前端项目，秒变权限管理系统。前端项目地址：https://github.com/macrozheng/mall-admin-web
+mall-tiny项目可无缝对接`mall-admin-web`
+前端项目，秒变权限管理系统。基于后端模块，新开发了对应的前端项目，基于vben-vue3进行开发，前端项目地址：https://github.com/jinpikaFE/boot-vben-admin
 
 ![](http://img.macrozheng.com/mall/project/mall_tiny_start_09.png)
 
