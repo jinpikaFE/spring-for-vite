@@ -53,7 +53,7 @@ secure:
       - /druid/**
       - /api/v1/admin/login
       - /api/v1/admin/register
-      - /api/v1/admin/info
+#      - /api/v1/admin/info
       - /api/v1/admin/logout
 
 # cos相关配置

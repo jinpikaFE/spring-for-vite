@@ -1,5 +1,6 @@
 package com.macro.mall.tiny.security.component;
 
+import cn.hutool.http.HttpStatus;
 import cn.hutool.json.JSONUtil;
 import com.macro.mall.tiny.common.api.CommonResult;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,6 +24,7 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler{
         response.setHeader("Cache-Control","no-cache");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+        response.setStatus(HttpStatus.HTTP_FORBIDDEN);
         response.getWriter().println(JSONUtil.parse(CommonResult.forbidden(e.getMessage())));
         response.getWriter().flush();
     }
