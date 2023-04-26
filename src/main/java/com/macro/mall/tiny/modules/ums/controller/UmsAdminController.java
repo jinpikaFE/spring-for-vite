@@ -15,8 +15,6 @@ import com.macro.mall.tiny.modules.ums.service.UmsRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +38,6 @@ import java.util.stream.Collectors;
 @Tag(name = "UmsAdminController", description = "后台用户管理")
 @RequestMapping("/api/v1/admin")
 public class UmsAdminController {
-    private static final Logger logger = LoggerFactory.getLogger(UmsAdminController.class);
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -65,7 +62,6 @@ public class UmsAdminController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<CommonResult<Map<String, String>>> login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam) {
-        logger.info("This is an info message.");
         String token = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
