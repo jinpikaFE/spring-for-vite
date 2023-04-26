@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class UmsResourceCategoryController {
     @ApiOperation("查询所有后台资源分类")
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<UmsResourceCategoryDto>> listAll() {
+    public ResponseEntity<CommonResult<List<UmsResourceCategoryDto>>> listAll() {
         List<UmsResourceCategoryDto> resourceList = resourceCategoryService.listAll();
         return CommonResult.success(resourceList);
     }
@@ -36,7 +37,7 @@ public class UmsResourceCategoryController {
     @ApiOperation("添加后台资源分类")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsResourceCategory umsResourceCategory) {
+    public ResponseEntity<CommonResult<Object>> create(@RequestBody UmsResourceCategory umsResourceCategory) {
         boolean success = resourceCategoryService.create(umsResourceCategory);
         if (success) {
             return CommonResult.success(null);
@@ -48,8 +49,8 @@ public class UmsResourceCategoryController {
     @ApiOperation("修改后台资源分类")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
-                               @RequestBody UmsResourceCategory umsResourceCategory) {
+    public ResponseEntity<CommonResult<Object>> update(@PathVariable Long id,
+                                                       @RequestBody UmsResourceCategory umsResourceCategory) {
         umsResourceCategory.setId(id);
         boolean success = resourceCategoryService.updateById(umsResourceCategory);
         if (success) {
@@ -62,7 +63,7 @@ public class UmsResourceCategoryController {
     @ApiOperation("根据ID删除后台资源")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public ResponseEntity<CommonResult<Object>> delete(@PathVariable Long id) {
         boolean success = resourceCategoryService.removeById(id);
         if (success) {
             return CommonResult.success(null);

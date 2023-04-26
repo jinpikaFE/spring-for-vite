@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class UmsResourceController {
     @ApiOperation("添加后台资源")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsResource umsResource) {
+    public ResponseEntity<CommonResult<Object>> create(@RequestBody UmsResource umsResource) {
         boolean success = resourceService.create(umsResource);
         dynamicSecurityMetadataSource.clearDataSource();
         if (success) {
@@ -46,8 +47,8 @@ public class UmsResourceController {
     @ApiOperation("修改后台资源")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
-                               @RequestBody UmsResource umsResource) {
+    public ResponseEntity<CommonResult<Object>> update(@PathVariable Long id,
+                                                       @RequestBody UmsResource umsResource) {
         boolean success = resourceService.update(id, umsResource);
         dynamicSecurityMetadataSource.clearDataSource();
         if (success) {
@@ -60,7 +61,7 @@ public class UmsResourceController {
     @ApiOperation("根据ID获取资源详情")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<UmsResource> getItem(@PathVariable Long id) {
+    public ResponseEntity<CommonResult<UmsResource>> getItem(@PathVariable Long id) {
         UmsResource umsResource = resourceService.getById(id);
         return CommonResult.success(umsResource);
     }
@@ -68,7 +69,7 @@ public class UmsResourceController {
     @ApiOperation("根据ID删除后台资源")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public ResponseEntity<CommonResult<Object>> delete(@PathVariable Long id) {
         boolean success = resourceService.delete(id);
         dynamicSecurityMetadataSource.clearDataSource();
         if (success) {
@@ -81,19 +82,19 @@ public class UmsResourceController {
     @ApiOperation("分页模糊查询后台资源")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<UmsResource>> list(@RequestParam(required = false) Long categoryId,
-                                                      @RequestParam(required = false) String nameKeyword,
-                                                      @RequestParam(required = false) String urlKeyword,
-                                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        Page<UmsResource> resourceList = resourceService.list(categoryId,nameKeyword, urlKeyword, pageSize, pageNum);
+    public ResponseEntity<CommonResult<CommonPage<UmsResource>>> list(@RequestParam(required = false) Long categoryId,
+                                                                      @RequestParam(required = false) String nameKeyword,
+                                                                      @RequestParam(required = false) String urlKeyword,
+                                                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        Page<UmsResource> resourceList = resourceService.list(categoryId, nameKeyword, urlKeyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(resourceList));
     }
 
     @ApiOperation("查询所有后台资源")
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<UmsResource>> listAll() {
+    public ResponseEntity<CommonResult<List<UmsResource>>> listAll() {
         List<UmsResource> resourceList = resourceService.list();
         return CommonResult.success(resourceList);
     }

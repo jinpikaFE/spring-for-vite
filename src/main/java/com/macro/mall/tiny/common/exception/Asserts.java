@@ -15,4 +15,8 @@ public class Asserts {
     public static void fail(IErrorCode errorCode) {
         throw new ApiException(errorCode);
     }
+
+    public static void codeFail(IErrorCode errorCode, String message) {
+        throw new ApiException(errorCode, message);
+    }
 }
