@@ -64,30 +64,26 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
-        UmsAdmin admin = getCacheService().getAdmin(username);
-        if (admin != null) return admin;
-        QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(UmsAdmin::getUsername, username);
-        List<UmsAdmin> adminList = list(wrapper);
-        if (adminList != null && adminList.size() > 0) {
-            admin = adminList.get(0);
-            getCacheService().setAdmin(admin);
-            return admin;
-        }
-        return null;
+        return getAdminByUsername(username, true);
     }
 
     public UmsAdmin getAdminByUsername(String username, Boolean needCache) {
-        UmsAdmin admin = getCacheService().getAdmin(username);
-        if (admin != null && needCache) return admin;
+        UmsAdmin admin = needCache ? getCacheService().getAdmin(username) : null;
+
+        if (admin != null) {
+            return admin;
+        }
+
         QueryWrapper<UmsAdmin> wrapper = new QueryWrapper<>();
         wrapper.lambda().eq(UmsAdmin::getUsername, username);
         List<UmsAdmin> adminList = list(wrapper);
-        if (adminList != null && adminList.size() > 0) {
+
+        if (adminList != null && !adminList.isEmpty()) {
             admin = adminList.get(0);
             getCacheService().setAdmin(admin);
             return admin;
         }
+
         return null;
     }
 
