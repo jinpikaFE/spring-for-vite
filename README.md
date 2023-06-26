@@ -1,22 +1,10 @@
-# mall-tiny
-
-<p>
-    <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
-    <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E4%BA%A4%E6%B5%81-%E5%BE%AE%E4%BF%A1%E7%BE%A4-2BA245.svg" alt="交流"></a>    
-    <a href="https://github.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
-    <a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
-</p>
+# spring-for-vite
 
 ## 简介
 
-mall-tiny是一款基于SpringBoot+MyBatis-Plus的快速开发脚手架，拥有完整的权限管理功能，可对接Vue前端，开箱即用。
+基于[mall-tiny](https://github.com/macrozheng/mall-tiny) 作为脚手架，进行个人项目[vite-react-tsadmin](https://github.com/jinpikaFE/vite-react-ts-admin),进行适配开发。
 
 ## 项目演示
-
-mall-tiny项目可无缝对接`mall-admin-web`
-前端项目，秒变权限管理系统。基于后端模块，新开发了对应的前端项目，基于vben-vue3进行开发，前端项目地址：https://github.com/jinpikaFE/boot-vben-admin
-
-![](http://img.macrozheng.com/mall/project/mall_tiny_start_09.png)
 
 ## 技术选型
 
