@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.macro.mall.tiny.modules.ums.model.UmsResourceCategory">
         <id column="id" property="id"/>
         <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
         <result column="name" property="name"/>
         <result column="sort" property="sort"/>
     </resultMap>
@@ -14,6 +15,7 @@
     <resultMap id="AssResultMap" type="com.macro.mall.tiny.modules.ums.dto.UmsResourceCategoryDto">
         <id column="id" property="id"/>
         <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
         <result column="name" property="name"/>
         <result column="sort" property="sort"/>
         <collection property="resources" select="getResourcesByCategoryId" column="id"></collection>
@@ -26,7 +28,7 @@
     </select>
 
     <select id="getResourceCategoryAss" resultMap="AssResultMap">
-        SELECT r.id, r.create_time, r.name, r.sort
+        SELECT r.id, r.create_time, r.name, r.sort,r.update_time
         FROM ums_resource_category r
         <trim prefix="where" prefixOverrides="and">
             And r.deleted = 0
