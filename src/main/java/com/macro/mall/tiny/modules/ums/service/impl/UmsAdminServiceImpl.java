@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.macro.mall.tiny.common.api.ResultCode;
 import com.macro.mall.tiny.common.exception.Asserts;
 import com.macro.mall.tiny.domain.AdminUserDetails;
 import com.macro.mall.tiny.modules.ums.dto.UmsAdminDto;
@@ -119,7 +120,7 @@ public class UmsAdminServiceImpl extends ServiceImpl<UmsAdminMapper, UmsAdmin> i
                 Asserts.fail("密码不正确");
             }
             if (!userDetails.isEnabled()) {
-                Asserts.fail("帐号已被禁用");
+                Asserts.codeFail(ResultCode.FORBIDDEN,"帐号已被禁用");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
