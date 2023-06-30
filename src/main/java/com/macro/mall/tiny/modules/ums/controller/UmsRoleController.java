@@ -18,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,10 +57,19 @@ public class UmsRoleController {
     }
 
     @ApiOperation("批量删除角色")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<CommonResult<Object>> delete(@RequestParam("ids") List<Long> ids) {
-        boolean success = roleService.delete(ids);
+    public ResponseEntity<CommonResult<Object>> delete(@RequestParam("ids") String ids) {
+        String[] strArray = ids.split(",");
+
+        List<Long> list = new ArrayList<>();
+
+        for (String s : strArray) {
+            long number = Long.parseLong(s);
+            list.add(number);
+        }
+
+        boolean success = roleService.delete(list);
         if (success) {
             return CommonResult.success(null);
         }
