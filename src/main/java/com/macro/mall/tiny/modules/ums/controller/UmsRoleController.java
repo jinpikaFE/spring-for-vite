@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class UmsRoleController {
     @ApiOperation("添加角色")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<CommonResult<UmsRoleParams>> create(@RequestBody UmsRoleParams role) {
+    public ResponseEntity<CommonResult<UmsRoleParams>> create(@Valid @RequestBody UmsRoleParams role) {
         UmsRoleParams results = roleService.create(role);
         if (results != null) {
             return CommonResult.success(results);
