@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.macro.mall.tiny.common.utils.LongZeroToNullSerializer;
+import com.macro.mall.tiny.modules.ums.enums.MenuCompon;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -57,6 +58,6 @@ public class UmsMenu implements Serializable {
     @ApiModelProperty(value = "是否显示")
     private Integer isShow;
 
-    @ApiModelProperty(value = "菜单类型")
-    private Integer type;
+    @ApiModelProperty(value = "菜单类型", allowableValues = "0,1,2")
+    private MenuCompon type;
 }
